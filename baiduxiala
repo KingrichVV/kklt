@@ -1,0 +1,74 @@
+import re
+
+
+import requests
+# content = "吃饭"
+from setContent import qiuqiu1
+# qiuqiu = ""
+# print(qiuqiu)
+tow = ""
+# 获取，基础词
+# get url
+url = 'https://m.baidu.com/sugrec'
+qiuqiu = qiuqiu1
+
+dic = {
+	"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+}
+list = qiuqiu.split('&&')
+for item in list:
+	param2 = {
+		"pre": "1",
+		"p": "3",
+		"ie": "utf - 8",
+		"json": "1",
+		"prod": "wise",
+		"from": "wise_web",
+		"sugsid": "110085,179346,180636,194529,196425,209568,210323,211433,212295,212870,212967,213033,213360,214793,215727,216047,216207,216714,216839,216942,217168,218359,218548,218620,219067,219412,219942,219946,220662,221006,221121,221317,221502,221527,221697,221716,221874,221899,221919,222298,222397,222502,222522,222617,222620,222625,222672,222780,222837,222870,222889,223064,223131,223192,223238,223375,223482,223556,223596,223769,223785,223810,223833,223859,224013,224099,224157,224195,224204,224375,224633,224754,224809,224858,224914,225245,225297,225335,225373,225439,225741,225856,226005,226011,226015,226076,226104,226141,226228,226284,226294,226381,226488,8000063,8000113,8000133,8000142,8000143,8000146,8000155,8000176",
+		"net": "1",
+		"os": "1",
+		"sp": "300",
+		"rm_brand": "0",
+		"callback": "jsonp8",
+		f"wd": {item},
+		f"pwd": {tow},
+		"lid": "10190174760115551145",
+		"sugid": "276695690663845",
+		"preqy": "世界杯",
+		"_": "1661431130868",
+	}
+	resp = requests.get(url = url, params = param2, headers = dic)
+	tow = item
+	# print(resp.text)
+	content = resp.text
+	obj = re.compile(r'"type".*?"q":"(?P<wahaha>.*?)"}', re.S)
+	result = obj.finditer(content)
+
+
+
+	for it in result:
+		# print(it.group())
+		print(it.group("wahaha"))
+resp.close()
+print("over")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
